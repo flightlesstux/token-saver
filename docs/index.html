@@ -56,12 +56,12 @@
   </script>
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H440JZZ0H1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NY7FHRDGCX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-H440JZZ0H1');
+    gtag('config', 'G-NY7FHRDGCX');
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,6 +79,7 @@
       <div class="nav-links">
         <a href="#how-it-works">How it works</a>
         <a href="#tools">Tools</a>
+        <a href="#examples">Examples</a>
         <a href="#install">Install</a>
         <a href="#faq">FAQ</a>
         <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -94,6 +95,7 @@
     <div class="container hero-layout">
       <div class="hero-left">
         <div class="badge animate-1">MCP Plugin · Open Source · MIT</div>
+        <div class="badge animate-1" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:var(--amber);margin-top:0.5rem">🛒 Submitted to Claude Marketplace · Pending Approval</div>
         <p class="slogan animate-1">Built for Claude. Watches every token.</p>
         <h1 class="animate-2">Stop burning tokens<br/>on output<br/><em>nobody reads.</em></h1>
         <p class="hero-sub animate-3">
@@ -137,7 +139,7 @@
         <span class="stat-label">alert levels</span>
       </div>
       <div class="stat">
-        <span class="stat-num">5</span>
+        <span class="stat-num">6</span>
         <span class="stat-label">MCP tools</span>
       </div>
       <div class="stat">
@@ -193,7 +195,7 @@
     <div class="container">
       <div class="section-header">
         <h2>MCP <em>Tools</em></h2>
-        <p class="section-sub">Five focused tools. Each does exactly one thing.</p>
+        <p class="section-sub">Six focused tools. Each does exactly one thing.</p>
       </div>
 
       <div class="benchmark-table-wrap">
@@ -231,10 +233,191 @@
               <td>Override warning / error / alert token thresholds and suppression flags for the current session.</td>
               <td class="dim">—</td>
             </tr>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">set_mode</code></td>
+              <td>Switch between <strong>off</strong> (default, silent), <strong>monitor</strong> (analyze only), and <strong>active</strong> (full suppression). Start here.</td>
+              <td class="dim">—</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <div class="benchmark-note">Alert levels: info (normal) · warning (&gt;1000 tokens) · error (&gt;5000 tokens) · alert (&gt;10000 tokens or repetitive ignored output)</div>
+      <div class="benchmark-note">Alert levels: info (normal) · warning (&gt;1000 tokens) · error (&gt;5000 tokens) · alert (&gt;10000 tokens or repetitive ignored output) &nbsp;·&nbsp; Default mode: <strong>off</strong> — call set_mode to activate</div>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="container">
+      <div class="section-header">
+        <h2>Example <em>usage</em></h2>
+        <p class="section-sub">Real scenarios. Real inputs. Real responses. See exactly what you get.</p>
+      </div>
+
+      <div class="modes-grid" style="grid-template-columns:1fr;gap:2rem;">
+
+        <!-- SCENARIO 1: enable -->
+        <div class="mode-card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <div class="mode-icon" style="margin:0">🚦</div>
+            <h3 style="margin:0">Scenario 1 — How to enable the plugin</h3>
+          </div>
+          <p>You don't call <code>set_mode</code> yourself. <strong>Claude does.</strong> After installing, just tell your AI client in plain English:</p>
+          <div style="background:rgba(245,158,11,0.06);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:0.9rem 1.2rem;margin:1rem 0;font-style:italic;color:var(--text)">"Enable token-saver in active mode"</div>
+          <p style="margin-bottom:1rem">Claude reads the available MCP tools, understands what token-saver does, and calls <code>set_mode</code> on your behalf. That's it. You never touch JSON directly. Under the hood, the MCP call looks like this:</p>
+          <pre style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:0.82rem;margin-bottom:1.25rem"><code><span class="c-comment">// Claude calls this automatically after you ask it to activate</span>
+<span class="c-brace">{</span> <span class="c-key">"name"</span>: <span class="c-str">"set_mode"</span>, <span class="c-key">"arguments"</span>: <span class="c-brace">{</span> <span class="c-key">"mode"</span>: <span class="c-str">"active"</span> <span class="c-brace">}</span> <span class="c-brace">}</span>
+<span class="c-comment">// response:</span>
+<span class="c-brace">{</span> <span class="c-key">"mode"</span>: <span class="c-str">"active"</span> <span class="c-brace">}</span></code></pre>
+          <p style="margin-bottom:0.75rem">There are three modes. Claude picks the right one based on what you ask for:</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem">
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;font-weight:600">OFF (default)</div>
+              <p style="margin:0;font-size:0.78rem;color:var(--text-muted)">Plugin is installed but completely silent. Nothing is analyzed. Zero overhead. Good for when you just want it ready but not running.</p>
+            </div>
+            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:1rem">
+              <div style="font-size:0.75rem;color:var(--amber);margin-bottom:0.5rem;font-weight:600">MONITOR</div>
+              <p style="margin:0;font-size:0.78rem;color:var(--text-muted)">Analyzes every output and reports waste — but never suppresses. Great for a first session to see what's burning tokens before committing to full suppression.</p>
+            </div>
+            <div style="background:var(--bg);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:1rem">
+              <div style="font-size:0.75rem;color:var(--error);margin-bottom:0.5rem;font-weight:600">ACTIVE</div>
+              <p style="margin:0;font-size:0.78rem;color:var(--text-muted)">Full mode. Log-pattern outputs get <code>shouldSuppress: true</code>. Claude acts on that signal and skips feeding the noise back into context on the next turn.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENARIO 2: check_output comparison -->
+        <div class="mode-card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <div class="mode-icon" style="margin:0">🔍</div>
+            <h3 style="margin:0">Scenario 2 — Your app spits out a wall of server logs</h3>
+          </div>
+          <p>You run a command and Claude gets back a 90-line Node.js startup log full of <code>[INFO]</code> and <code>[DEBUG]</code> lines. Nobody asked for that. Here's what token-saver tells you depending on the active mode:</p>
+
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:1rem;font-size:0.8rem">
+            <div style="color:var(--text-muted);margin-bottom:0.5rem;font-weight:600;font-size:0.75rem">INPUT passed to check_output</div>
+            <pre style="margin:0;font-size:0.78rem;color:var(--text-muted)"><code>[INFO]  2024-01-15T09:12:33Z  Server starting on port 3000
+[DEBUG] 2024-01-15T09:12:33Z  Loading config from /etc/app/config.json
+[INFO]  2024-01-15T09:12:33Z  Database connection pool initialized (size: 10)
+[DEBUG] 2024-01-15T09:12:34Z  Route /api/health registered
+[DEBUG] 2024-01-15T09:12:34Z  Route /api/users registered
+... (85 more lines like this)</code></pre>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+            <div>
+              <div style="font-size:0.75rem;color:var(--amber);font-weight:600;margin-bottom:0.5rem;padding:0.35rem 0.75rem;background:rgba(245,158,11,0.1);border-radius:6px;display:inline-block">monitor mode response</div>
+              <pre style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:0.78rem;margin-top:0.5rem"><code><span class="c-brace">{</span>
+  <span class="c-key">"alertLevel"</span>: <span class="c-warn">"warning"</span>,
+  <span class="c-key">"tokens"</span>: <span class="c-str">342</span>,
+  <span class="c-key">"outputType"</span>: <span class="c-str">"log"</span>,
+  <span class="c-key">"shouldSuppress"</span>: <span class="c-warn">false</span>,
+  <span class="c-key">"reason"</span>: <span class="c-str">"Output matches log/noise patterns"</span>,
+  <span class="c-key">"detectedPatterns"</span>: <span class="c-brace">[</span>
+    <span class="c-brace">{</span> <span class="c-key">"pattern"</span>: <span class="c-str">"\\[INFO\\]"</span>,
+      <span class="c-key">"matchCount"</span>: <span class="c-str">47</span> <span class="c-brace">}</span>,
+    <span class="c-brace">{</span> <span class="c-key">"pattern"</span>: <span class="c-str">"\\[DEBUG\\]"</span>,
+      <span class="c-key">"matchCount"</span>: <span class="c-str">41</span> <span class="c-brace">}</span>
+  <span class="c-brace">]</span>
+<span class="c-brace">}</span></code></pre>
+              <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem">✅ Detected the waste, told you about it. <strong>Did not suppress</strong> — you're in observe mode.</p>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;color:var(--error);font-weight:600;margin-bottom:0.5rem;padding:0.35rem 0.75rem;background:rgba(239,68,68,0.1);border-radius:6px;display:inline-block">active mode response</div>
+              <pre style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:0.78rem;margin-top:0.5rem"><code><span class="c-brace">{</span>
+  <span class="c-key">"alertLevel"</span>: <span class="c-warn">"warning"</span>,
+  <span class="c-key">"tokens"</span>: <span class="c-str">342</span>,
+  <span class="c-key">"outputType"</span>: <span class="c-str">"log"</span>,
+  <span class="c-key">"shouldSuppress"</span>: <span class="c-warn">true</span>,
+  <span class="c-key">"reason"</span>: <span class="c-str">"Output matches log/noise patterns
+    and will be suppressed"</span>,
+  <span class="c-key">"detectedPatterns"</span>: <span class="c-brace">[</span>
+    <span class="c-brace">{</span> <span class="c-key">"pattern"</span>: <span class="c-str">"\\[INFO\\]"</span>,
+      <span class="c-key">"matchCount"</span>: <span class="c-str">47</span> <span class="c-brace">}</span>,
+    <span class="c-brace">{</span> <span class="c-key">"pattern"</span>: <span class="c-str">"\\[DEBUG\\]"</span>,
+      <span class="c-key">"matchCount"</span>: <span class="c-str">41</span> <span class="c-brace">}</span>
+  <span class="c-brace">]</span>
+<span class="c-brace">}</span></code></pre>
+              <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem">🔕 Same detection, but now <code>shouldSuppress: true</code>. Your client skips feeding those 342 tokens back into context. Every. Single. Turn.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENARIO 3: analyze_history -->
+        <div class="mode-card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <div class="mode-icon" style="margin:0">🔁</div>
+            <h3 style="margin:0">Scenario 3 — Claude keeps repeating itself in history</h3>
+          </div>
+          <p>You've been debugging for 30 turns. Claude has sent the same file contents 4 times. The same error message appears in 6 different messages. <code>analyze_history</code> finds all of it.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;font-weight:600">INPUT — your messages array</div>
+              <pre style="margin:0;font-size:0.78rem;color:var(--text-muted)"><code>[
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"user"</span>,      <span class="c-key">"content"</span>: <span class="c-str">"fix the auth bug"</span> <span class="c-brace">}</span>,
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"assistant"</span>, <span class="c-key">"content"</span>: <span class="c-str">"&lt;full file contents&gt;"</span> <span class="c-brace">}</span>,
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"user"</span>,      <span class="c-key">"content"</span>: <span class="c-str">"fix the auth bug"</span> <span class="c-brace">}</span>,
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"assistant"</span>, <span class="c-key">"content"</span>: <span class="c-str">"&lt;full file contents&gt;"</span> <span class="c-brace">}</span>,
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"user"</span>,      <span class="c-key">"content"</span>: <span class="c-str">"fix the auth bug"</span> <span class="c-brace">}</span>,
+  <span class="c-brace">{</span> <span class="c-key">"role"</span>: <span class="c-str">"assistant"</span>, <span class="c-key">"content"</span>: <span class="c-str">"&lt;full file contents&gt;"</span> <span class="c-brace">}</span>
+]</code></pre>
+            </div>
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem">
+              <div style="font-size:0.75rem;color:var(--error);margin-bottom:0.5rem;font-weight:600">analyze_history response</div>
+              <pre style="margin:0;font-size:0.78rem"><code><span class="c-brace">{</span>
+  <span class="c-key">"totalMessages"</span>: <span class="c-str">6</span>,
+  <span class="c-key">"totalTokens"</span>: <span class="c-str">1840</span>,
+  <span class="c-key">"repetitiveMessages"</span>: <span class="c-brace">[</span>
+    <span class="c-brace">{</span> <span class="c-key">"index"</span>: <span class="c-str">2</span>, <span class="c-key">"role"</span>: <span class="c-str">"user"</span>,
+      <span class="c-key">"tokens"</span>: <span class="c-str">4</span>,
+      <span class="c-key">"reason"</span>: <span class="c-str">"Near-duplicate of message 0"</span> <span class="c-brace">}</span>,
+    <span class="c-brace">{</span> <span class="c-key">"index"</span>: <span class="c-str">3</span>, <span class="c-key">"role"</span>: <span class="c-str">"assistant"</span>,
+      <span class="c-key">"tokens"</span>: <span class="c-str">610</span>,
+      <span class="c-key">"reason"</span>: <span class="c-str">"Near-duplicate of message 1"</span> <span class="c-brace">}</span>,
+    <span class="c-brace">{</span> <span class="c-key">"index"</span>: <span class="c-str">4</span>, <span class="c-key">"role"</span>: <span class="c-str">"user"</span>, <span class="c-key">"tokens"</span>: <span class="c-str">4</span> <span class="c-brace">}</span>,
+    <span class="c-brace">{</span> <span class="c-key">"index"</span>: <span class="c-str">5</span>, <span class="c-key">"role"</span>: <span class="c-str">"assistant"</span>, <span class="c-key">"tokens"</span>: <span class="c-str">610</span> <span class="c-brace">}</span>
+  <span class="c-brace">]</span>,
+  <span class="c-key">"estimatedTokenSavings"</span>: <span class="c-str">1228</span>,
+  <span class="c-key">"suggestedTruncation"</span>: <span class="c-str">4</span>,
+  <span class="c-key">"alertLevel"</span>: <span class="c-warn">"alert"</span>
+<span class="c-brace">}</span></code></pre>
+            </div>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem">👆 1 228 tokens saveable. 4 messages suggested for truncation. That's 4 × 610 tokens re-sent on <em>every future turn</em> for zero reason. The plugin found it in one call.</p>
+        </div>
+
+        <!-- SCENARIO 4: proof test -->
+        <div class="mode-card">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <div class="mode-icon" style="margin:0">📊</div>
+            <h3 style="margin:0">Proof test — full 9-scenario verification run</h3>
+          </div>
+          <p>Run <code>python3 test_live.py</code> locally. It starts the MCP server, exercises every mode and tool, and reports exactly what was saved. Actual output:</p>
+          <pre style="margin-top:1rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:0.78rem;overflow-x:auto;line-height:1.6"><code><span style="color:var(--text-muted)">============================================================
+TOKEN-SAVER PROOF TEST
+============================================================</span>
+
+[1] mode=off → skipped=true          <span style="color:var(--success)">✓ PASS</span>  <span style="color:var(--text-muted)">← silent by default</span>
+[2] set_mode(monitor)                 <span style="color:var(--success)">✓ PASS</span>
+[3] short text → level=info           <span style="color:var(--success)">✓ PASS</span>  <span style="color:var(--text-muted)">← normal output, no action</span>
+[4] 1125-token output → <span style="color:var(--amber)">warning</span>       <span style="color:var(--success)">✓ PASS</span>  <span style="color:var(--text-muted)">← threshold triggered</span>
+[5] log in monitor → patterns=3, suppress=false  <span style="color:var(--success)">✓ PASS</span>  <span style="color:var(--text-muted)">← detected, not suppressed</span>
+[6] set_mode(active)                  <span style="color:var(--success)">✓ PASS</span>
+[7] log in active → <span style="color:var(--amber)">suppressed 87 tokens</span>  <span style="color:var(--success)">✓ PASS</span>  <span style="color:var(--text-muted)">← same log, now suppressed</span>
+[8] repetitive history → <span style="color:var(--error)">alert</span>, 95 tokens saveable  <span style="color:var(--success)">✓ PASS</span>
+[9] session stats → 201 tokens suppressed  <span style="color:var(--success)">✓ PASS</span>
+
+<span style="color:var(--text-muted)">============================================================
+PROOF SUMMARY
+============================================================</span>
+  Tokens suppressed : <span style="color:var(--amber)">201</span>
+  Warnings fired    : <span style="color:var(--amber)">2</span>    Alerts fired : <span style="color:var(--error)">1</span>
+  Turns analyzed    : 5
+
+  Overall: <span style="color:var(--success)">ALL CHECKS PASSED ✓</span>
+<span style="color:var(--text-muted)">============================================================</span></code></pre>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -243,6 +426,13 @@
       <div class="section-header">
         <h2>Install <em>token-saver</em></h2>
         <p class="section-sub">Two steps. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible client.</p>
+      </div>
+
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem">
+        <div style="font-size:0.85rem;color:var(--amber);font-weight:600;margin-bottom:0.75rem">⚡ Start saving in 2 commands — install from GitHub</div>
+        <pre style="margin:0;font-size:0.85rem"><code>git clone https://github.com/flightlesstux/token-saver.git &amp;&amp; cd token-saver
+npm ci &amp;&amp; npm run build &amp;&amp; npm link</code></pre>
+        <p style="margin:0.75rem 0 0;font-size:0.82rem;color:var(--text-muted)">Then add <code>"command": "token-saver-mcp"</code> to your <code>~/.claude/settings.json</code> MCP servers — same as below.</p>
       </div>
 
       <div class="install-tabs">
@@ -292,37 +482,75 @@
     <div class="container">
       <div class="section-header">
         <h2>FAQ</h2>
-        <p class="section-sub">Common questions about token-saver.</p>
+        <p class="section-sub">Questions people actually ask. Answered once, here, forever. You're welcome. 🫡</p>
       </div>
 
       <div class="faq-list">
 
         <div class="faq-item">
+          <h3>I'm a lawyer / teacher / doctor / kid — do I need to understand any of this?</h3>
+          <p>Absolutely not. You just need the <em>answer</em>, not the 47-page log Claude printed to explain how it got there. token-saver watches the behind-the-scenes machinery so you don't have to. Think of it as the bouncer at the door of your context window — if it's garbage, it doesn't get in. You get results, not receipts.</p>
+          <p>Bonus: less token waste = less GPU energy burned per query = slightly happier planet. 🌍 You're basically an eco-warrior now.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Wait — does this actually save money? How much?</h3>
+          <p>Yes, real money. Here's the math: Anthropic charges per input token on every turn. If Claude prints a 2000-token stack trace you never read, you're paying for those 2000 tokens <em>again</em> every single turn they stay in context. token-saver catches this, flags it, and marks it for suppression.</p>
+          <p>In our proof test: <strong>201 tokens suppressed in one short session</strong> with 5 turns. Scale that to a real 50-turn debugging session with verbose logs and you're saving thousands of tokens — that's real cents per session, real dollars per month at any meaningful usage volume. The plugin costs $0.00.</p>
+        </div>
+
+        <div class="faq-item">
           <h3>What is the difference between warning, error, and alert?</h3>
-          <p><strong>info</strong>: output is within normal bounds (&lt;1000 tokens). No action needed.</p>
-          <p><strong>warning</strong>: output exceeds 1000 tokens OR matches log/noise patterns — worth suppressing.</p>
-          <p><strong>error</strong>: output exceeds 5000 tokens — likely wasteful and should be truncated.</p>
-          <p><strong>alert</strong>: output exceeds 10000 tokens OR repetitive ignored messages exceed the inactivity threshold — immediate action recommended.</p>
+          <p><strong>info</strong> — all good, carry on (&lt;1 000 tokens, no noise patterns). Nothing to see here.</p>
+          <p><strong>warning</strong> — getting spicy. Output exceeds 1 000 tokens or matches log/noise patterns. Worth a look.</p>
+          <p><strong>error</strong> — this is wasteful. Over 5 000 tokens. Should be truncated before it re-enters context.</p>
+          <p><strong>alert</strong> — red siren, full chaos. Over 10 000 tokens, or Claude is stuck in a loop repeating itself like your uncle at Christmas dinner. Immediate action recommended.</p>
         </div>
 
         <div class="faq-item">
-          <h3>Does token-saver actually delete or block output?</h3>
-          <p>No. token-saver is an <em>advisor</em>. It sets <code>shouldSuppress: true</code> on outputs that match suppression criteria and tells you why — but it does not intercept or modify any API calls. Your client decides what to do with that signal.</p>
+          <h3>Does token-saver actually delete or block anything?</h3>
+          <p>No. token-saver is a <em>polite advisor</em>, not a bodyguard. It sets <code>shouldSuppress: true</code> on noisy outputs and explains why — but it never intercepts, modifies, or blocks any API call. Your client decides what to do with that signal. We tell you the kitchen is on fire; it's still your kitchen.</p>
         </div>
 
         <div class="faq-item">
-          <h3>How does token counting work?</h3>
-          <p>token-saver uses a fast heuristic: approximately 4 characters per token. This is accurate enough for detecting waste at scale. It does not call the Anthropic tokenizer API (which would add latency and cost).</p>
+          <h3>Why is the default mode "off"? That seems useless.</h3>
+          <p>It's intentional. Dropping a plugin that immediately starts flagging everything in your workflow is rude. Install it, verify it's there, then turn it on when you're ready with <code>set_mode("monitor")</code> to observe first, or <code>set_mode("active")</code> to go full suppression. You're in control. The plugin doesn't assume it knows your workflow better than you do.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>What's the difference between monitor and active mode?</h3>
+          <p><strong>monitor</strong> — analysis on, suppression off. Great for understanding your token waste before committing to suppression. It tells you "hey, this looks like a log dump" without doing anything about it.</p>
+          <p><strong>active</strong> — full mode. Analyzes AND sets <code>shouldSuppress: true</code> on matching outputs. Your client can act on that signal to skip feeding the noise back into context.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How does token counting work? Is it accurate?</h3>
+          <p>It uses a fast heuristic: ~4 characters per token (the English/code average). It's not the Anthropic tokenizer — that would add a network call and latency, which would be ironic for a plugin designed to save resources. The heuristic is accurate enough to catch waste at scale. If you're 10% off on a 5 000-token log dump, you still know it's a 5 000-token log dump.</p>
         </div>
 
         <div class="faq-item">
           <h3>Which models does it support?</h3>
-          <p>token-saver is model-agnostic — it analyzes text output regardless of which model produced it. It works with any Anthropic model and any MCP-compatible client.</p>
+          <p>All of them. token-saver analyzes <em>text</em> — it doesn't care which model produced it. Claude 3 Haiku, Sonnet, Opus, Claude 4, whatever ships next week — model-agnostic by design. Works with any MCP-compatible client too: Claude Code, Cursor, Windsurf, Zed, Continue.dev.</p>
         </div>
 
         <div class="faq-item">
           <h3>Can I add custom log patterns?</h3>
-          <p>Yes. Add a <code>logPatterns</code> array to your <code>.token-saver.json</code> with additional regex strings. They merge with the built-in patterns.</p>
+          <p>Yes. Add a <code>logPatterns</code> array to <code>.token-saver.json</code> with regex strings. They are merged with the built-in patterns. Your custom Java spring boot timestamp format that looks nothing like anything normal? Covered. Your proprietary monitoring system's output? Add a pattern. Done.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does this send my data anywhere?</h3>
+          <p>No. Everything runs locally, in memory, in your process. No telemetry, no analytics, no "anonymous usage data" that's actually not anonymous. When the MCP server stops, the session stats evaporate. See the <a href="privacy.html">Privacy Policy</a> for the full (very short) story.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>I care about the environment. Does this actually help?</h3>
+          <p>Every token you don't send is a tiny bit of GPU compute you don't burn. LLM inference consumes real energy — data centers, cooling, the works. By suppressing 2 000-token log dumps that re-enter context on every turn, you're not just saving money: you're shaving off compute that would have run on a server somewhere. It's not going to save the ice caps by itself, but hey — every watt counts. Use token-saver. Hug a tree. Both. 🌱</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is this free? What's the catch?</h3>
+          <p>MIT license. Free forever. No SaaS, no subscription, no "free tier with 1 000 checks/month." The catch is that it's open source, so if it breaks you get to help fix it. That's the deal. Fair? Fair.</p>
         </div>
 
       </div>
