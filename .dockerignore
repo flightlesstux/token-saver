@@ -1,0 +1,22 @@
+# Static site files not needed in image
+docs/
+coverage/
+
+# Dev and config files
+*.md
+*.yml
+*.yaml
+.github/
+.git/
+.gitignore
+.gitattributes
+.env*
+.eslintrc*
+eslint.config.*
+commitlint.config.*
+.releaserc.json
+vitest.config.*
+
+# Build artifacts from local machine
+dist/
+node_modules/
