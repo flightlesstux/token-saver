@@ -41,15 +41,30 @@ Your AI model output (Claude, GPT, Gemini, or any other)
 
 ## Installation
 
-### npm (global)
+Three ways — pick what suits you:
+
+### Option A — npx (no install, always latest)
+
+No global install needed. Add directly to your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "token-saver-mcp": {
+      "command": "npx",
+      "args": ["-y", "token-saver-mcp"]
+    }
+  }
+}
+```
+
+### Option B — npm global
 
 ```bash
 npm install -g token-saver-mcp
 ```
 
-### Claude Code
-
-Add to `~/.claude/settings.json`:
+Then add to your MCP client config:
 
 ```json
 {
@@ -61,17 +76,13 @@ Add to `~/.claude/settings.json`:
 }
 ```
 
-### Other MCP clients (Cursor, Windsurf, Zed, Continue.dev)
+### Option C — install directly from GitHub
 
-```json
-{
-  "mcpServers": {
-    "token-saver-mcp": {
-      "command": "token-saver-mcp"
-    }
-  }
-}
+```bash
+npm install -g github:flightlesstux/token-saver
 ```
+
+Same config as Option B. Works without a build step — compiled output is included in the repo.
 
 ---
 

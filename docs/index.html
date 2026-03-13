@@ -428,11 +428,30 @@ PROOF SUMMARY
         <p class="section-sub">Two steps. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible client.</p>
       </div>
 
-      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem">
-        <div style="font-size:0.85rem;color:var(--amber);font-weight:600;margin-bottom:0.75rem">⚡ Start saving in 2 commands — install from GitHub</div>
-        <pre style="margin:0;font-size:0.85rem"><code>git clone https://github.com/flightlesstux/token-saver.git &amp;&amp; cd token-saver
-npm ci &amp;&amp; npm run build &amp;&amp; npm link</code></pre>
-        <p style="margin:0.75rem 0 0;font-size:0.82rem;color:var(--text-muted)">Then add <code>"command": "token-saver-mcp"</code> to your <code>~/.claude/settings.json</code> MCP servers — same as below.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem">
+        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:1.25rem 1.5rem">
+          <div style="font-size:0.75rem;color:var(--amber);font-weight:700;margin-bottom:0.75rem;letter-spacing:0.05em">OPTION A — npx</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:0.75rem">No install needed. Always pulls the latest version. Just add to your MCP config:</div>
+          <pre style="margin:0;font-size:0.8rem"><code><span class="c-brace">{</span>
+  <span class="c-key">"command"</span>: <span class="c-str">"npx"</span>,
+  <span class="c-key">"args"</span>: <span class="c-brace">[</span><span class="c-str">"-y"</span>, <span class="c-str">"token-saver-mcp"</span><span class="c-brace">]</span>
+<span class="c-brace">}</span></code></pre>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem">
+          <div style="font-size:0.75rem;color:var(--text-muted);font-weight:700;margin-bottom:0.75rem;letter-spacing:0.05em">OPTION B — npm global</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:0.75rem">Install once, use everywhere:</div>
+          <pre style="margin:0;font-size:0.8rem"><code>npm install -g token-saver-mcp</code></pre>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin:0.75rem 0">Then in your MCP config:</div>
+          <pre style="margin:0;font-size:0.8rem"><code><span class="c-brace">{</span>
+  <span class="c-key">"command"</span>: <span class="c-str">"token-saver-mcp"</span>
+<span class="c-brace">}</span></code></pre>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem">
+          <div style="font-size:0.75rem;color:var(--text-muted);font-weight:700;margin-bottom:0.75rem;letter-spacing:0.05em">OPTION C — from GitHub</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:0.75rem">Install directly from the repo in 1 command:</div>
+          <pre style="margin:0;font-size:0.8rem"><code>npm install -g github:flightlesstux/token-saver</code></pre>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.75rem">No build step needed — compiled output is already in the repo. Same MCP config as Option B.</div>
+        </div>
       </div>
 
       <div class="install-tabs">
@@ -440,26 +459,20 @@ npm ci &amp;&amp; npm run build &amp;&amp; npm link</code></pre>
           <div class="install-step">
             <div class="step-track"><div class="step-num">1</div><div class="step-line"></div></div>
             <div class="step-content">
-              <h3>Install globally via npm</h3>
-              <pre><code>npm install -g token-saver-mcp</code></pre>
-            </div>
-          </div>
-          <div class="install-step">
-            <div class="step-track"><div class="step-num">2</div><div class="step-line"></div></div>
-            <div class="step-content">
-              <h3>Add to Claude Code settings</h3>
-              <p>Edit <code>~/.claude/settings.json</code>:</p>
+              <h3>Add to your MCP client settings</h3>
+              <p>Works with Claude Code, Cursor, Windsurf, Zed, Continue.dev — any MCP-compatible client. Example for Claude Code (<code>~/.claude/settings.json</code>):</p>
               <pre><code>{
   <span class="c-key">"mcpServers"</span>: {
     <span class="c-key">"token-saver-mcp"</span>: {
-      <span class="c-key">"command"</span>: <span class="c-str">"token-saver-mcp"</span>
+      <span class="c-key">"command"</span>: <span class="c-str">"npx"</span>,
+      <span class="c-key">"args"</span>: <span class="c-brace">[</span><span class="c-str">"-y"</span>, <span class="c-str">"token-saver-mcp"</span><span class="c-brace">]</span>
     }
   }
 }</code></pre>
             </div>
           </div>
           <div class="install-step">
-            <div class="step-track"><div class="step-num">3</div></div>
+            <div class="step-track"><div class="step-num">2</div></div>
             <div class="step-content">
               <h3>(Optional) Configure thresholds</h3>
               <p>Create <code>.token-saver.json</code> in your project root:</p>
