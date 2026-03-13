@@ -1,6 +1,6 @@
 # token-saver
 
-> MCP plugin that alerts you when Claude API token usage is wasteful. Fires warnings, errors, and alerts on large outputs, verbose logs, and repetitive history. Auto-suppresses noise to keep your context lean.
+> MCP plugin that alerts you when AI token usage is wasteful. Works with Claude Code, Cursor, Windsurf, Zed, Continue.dev — any MCP-compatible client, any model. Fires warnings, errors, and alerts on large outputs, verbose logs, and repetitive history. Auto-suppresses noise to keep your context lean.
 
 [![CI](https://github.com/flightlesstux/token-saver/actions/workflows/ci.yml/badge.svg)](https://github.com/flightlesstux/token-saver/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/token-saver-mcp)](https://www.npmjs.com/package/token-saver-mcp)
@@ -11,16 +11,18 @@
 
 ## Overview
 
-In agentic coding sessions, Claude API responses often contain massive log outputs, repeated tool results, or near-duplicate history entries — all of which are re-sent on every turn, burning tokens. token-saver monitors every output and tells you when something is wasteful, so you can suppress it before it poisons your context window.
+In agentic coding sessions, AI model responses often contain massive log outputs, repeated tool results, or near-duplicate history entries — all of which are re-sent on every turn, burning tokens. token-saver monitors every output and tells you when something is wasteful, so you can suppress it before it poisons your context window.
 
-**Core value proposition**: Most token waste in long Claude sessions comes from outputs nobody actually reads — stack traces, verbose logs, repeated file contents. token-saver catches these early and tells you exactly why and how much you're wasting.
+**Works with any MCP-compatible client**: Claude Code, Cursor, Windsurf, Zed, Continue.dev, and any other tool that speaks the Model Context Protocol. No dependency on any specific AI provider or API — token-saver analyzes plain text and is model-agnostic by design.
+
+**Core value proposition**: Most token waste in long AI sessions comes from outputs nobody actually reads — stack traces, verbose logs, repeated file contents. token-saver catches these early and tells you exactly why and how much you're wasting.
 
 ---
 
 ## How it works
 
 ```
-Your Claude API output
+Your AI model output (Claude, GPT, Gemini, or any other)
         │
         ▼
   check_output          ← estimates tokens, detects log/noise patterns

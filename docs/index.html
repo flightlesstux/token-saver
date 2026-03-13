@@ -96,10 +96,10 @@
       <div class="hero-left">
         <div class="badge animate-1">MCP Plugin · Open Source · MIT</div>
         <div class="badge animate-1" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:var(--amber);margin-top:0.5rem">🛒 Submitted to Claude Marketplace · Pending Approval</div>
-        <p class="slogan animate-1">Built for Claude. Watches every token.</p>
+        <p class="slogan animate-1">Any AI client. Any model. Watches every token.</p>
         <h1 class="animate-2">Stop burning tokens<br/>on output<br/><em>nobody reads.</em></h1>
         <p class="hero-sub animate-3">
-          token-saver monitors your Claude API outputs and fires <strong>warnings, errors, and alerts</strong> when usage is wasteful. Logs, verbose history, and repetitive noise — suppressed automatically to keep your context lean.
+          token-saver monitors AI model outputs and fires <strong>warnings, errors, and alerts</strong> when usage is wasteful. Works with Claude Code, Cursor, Windsurf, Zed, Continue.dev — any MCP-compatible client, any model. Logs, verbose history, and repetitive noise — suppressed automatically to keep your context lean.
         </p>
         <div class="hero-actions animate-4">
           <a href="#install" class="btn-primary">Get started</a>
@@ -158,7 +158,7 @@
       <div class="section-header">
         <h2>How <em>token-saver</em> works</h2>
         <p class="section-sub">
-          Every API output passes through token-saver's analyzer. It estimates token count, detects noise patterns (logs, stack traces, verbose history), and fires an alert if usage exceeds your thresholds. <strong>Suppressed outputs are never sent back</strong> into the context window.
+          Every AI model output passes through token-saver's analyzer — regardless of which model or client produced it. It estimates token count, detects noise patterns (logs, stack traces, verbose history), and fires an alert if usage exceeds your thresholds. <strong>Suppressed outputs are never sent back</strong> into the context window.
         </p>
       </div>
 
@@ -529,8 +529,9 @@ npm ci &amp;&amp; npm run build &amp;&amp; npm link</code></pre>
         </div>
 
         <div class="faq-item">
-          <h3>Which models does it support?</h3>
-          <p>All of them. token-saver analyzes <em>text</em> — it doesn't care which model produced it. Claude 3 Haiku, Sonnet, Opus, Claude 4, whatever ships next week — model-agnostic by design. Works with any MCP-compatible client too: Claude Code, Cursor, Windsurf, Zed, Continue.dev.</p>
+          <h3>Which models and clients does it support?</h3>
+          <p>All of them. token-saver has <strong>zero dependency on any AI provider or API</strong> — it analyzes plain text and doesn't care who produced it. Claude, GPT-4, Gemini, Mistral, Llama, whatever ships next month — model-agnostic by design.</p>
+          <p>On the client side: Claude Code, Cursor, Windsurf, Zed, Continue.dev, and any other tool that speaks the Model Context Protocol. If it supports MCP, token-saver works with it.</p>
         </div>
 
         <div class="faq-item">
