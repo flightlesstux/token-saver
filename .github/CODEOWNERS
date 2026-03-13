@@ -1,0 +1,13 @@
+# Global fallback — maintainers review everything
+* @flightlesstux
+
+# Core analysis logic — requires 2 approvals
+src/output-analyzer.ts   @flightlesstux
+src/alert-manager.ts     @flightlesstux
+
+# Handlers and index — 1 approval sufficient
+src/handlers.ts   @flightlesstux
+src/index.ts      @flightlesstux
+
+# CI/CD and repo config — maintainers only
+.github/   @flightlesstux
