@@ -13,6 +13,7 @@ import {
   handleResetSessionStats,
   handleAnalyzeHistory,
   handleSetThresholds,
+  handleSetMode,
   handleUnknownTool,
 } from './handlers.js'
 
@@ -30,7 +31,7 @@ const pkg = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf8'))
 const config = loadConfig()
 const manager = new AlertManager()
 
-process.stderr.write('[token-saver] Starting MCP server...\n')
+process.stderr.write(`[token-saver] Starting MCP server... (mode: ${config.mode})\n`)
 
 const server = new Server(
   { name: 'token-saver-mcp', version: pkg.version },
@@ -137,6 +138,28 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: 'set_mode',
+      description:
+        'Switch the plugin mode. "off" (default) — plugin is silent, all analysis is skipped. "monitor" — analyze and report but never suppress. "active" — full analysis with suppression. Returns the applied mode.',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          mode: {
+            type: 'string',
+            enum: ['off', 'monitor', 'active'],
+            description: '"off" disables all analysis. "monitor" reports without suppressing. "active" enables full suppression.',
+          },
+        },
+        required: ['mode'],
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          mode: { type: 'string', enum: ['off', 'monitor', 'active'] },
+        },
+      },
+    },
+    {
       name: 'set_thresholds',
       description:
         'Override alert thresholds for the current session. All values are in estimated tokens. Returns the applied configuration.',
@@ -168,6 +191,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'get_session_stats':   return handleGetSessionStats(manager)
       case 'reset_session_stats': return handleResetSessionStats(manager)
       case 'analyze_history':     return handleAnalyzeHistory(toolArgs as Record<string, unknown>, config, manager)
+      case 'set_mode':            return handleSetMode(toolArgs as Record<string, unknown>, config)
       case 'set_thresholds':      return handleSetThresholds(toolArgs as Record<string, unknown>, config)
       default:                    return handleUnknownTool(name)
     }

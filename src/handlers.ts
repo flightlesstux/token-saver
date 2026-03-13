@@ -1,4 +1,4 @@
-import { analyzeOutput, analyzeHistory, type TokenSaverConfig, type MessageParam } from './output-analyzer.js'
+import { analyzeOutput, analyzeHistory, type TokenSaverConfig, type MessageParam, type PluginMode } from './output-analyzer.js'
 import { AlertManager } from './alert-manager.js'
 
 type ToolResult = {
@@ -19,6 +19,7 @@ export function handleCheckOutput(
   config: TokenSaverConfig,
   manager: AlertManager
 ): ToolResult {
+  if (config.mode === 'off') return ok({ mode: 'off', skipped: true })
   if (!args || typeof args['text'] !== 'string') {
     return err('Missing required field: text (string)')
   }
@@ -43,6 +44,7 @@ export function handleAnalyzeHistory(
   config: TokenSaverConfig,
   manager: AlertManager
 ): ToolResult {
+  if (config.mode === 'off') return ok({ mode: 'off', skipped: true })
   if (!args || !Array.isArray(args['messages'])) {
     return err('Missing required field: messages (array)')
   }
@@ -72,6 +74,21 @@ export function handleSetThresholds(
       suppressRepetitiveHistory: config.suppressRepetitiveHistory,
     },
   })
+}
+
+export function handleSetMode(
+  args: Record<string, unknown> | undefined,
+  config: TokenSaverConfig
+): ToolResult {
+  if (!args || typeof args['mode'] !== 'string') {
+    return err('Missing required field: mode ("off" | "monitor" | "active")')
+  }
+  const mode = args['mode'] as string
+  if (!['off', 'monitor', 'active'].includes(mode)) {
+    return err(`Invalid mode "${mode}". Must be one of: off, monitor, active`)
+  }
+  config.mode = mode as PluginMode
+  return ok({ mode: config.mode })
 }
 
 export function handleUnknownTool(name: string): ToolResult {

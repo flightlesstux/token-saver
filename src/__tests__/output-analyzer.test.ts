@@ -30,10 +30,17 @@ describe('analyzeOutput', () => {
     expect(result.alertLevel).toBe('alert')
   })
 
-  it('detects log patterns and sets shouldSuppress', () => {
+  it('detects log patterns and sets shouldSuppress in active mode', () => {
     const logText = '[INFO] server started\n[DEBUG] connection established\n[TRACE] request received'
-    const result = analyzeOutput(logText, { ...DEFAULT_CONFIG, suppressLogs: true })
+    const result = analyzeOutput(logText, { ...DEFAULT_CONFIG, mode: 'active', suppressLogs: true })
     expect(result.shouldSuppress).toBe(true)
+    expect(result.detectedPatterns.length).toBeGreaterThan(0)
+  })
+
+  it('does not suppress in monitor mode even with log patterns', () => {
+    const logText = '[INFO] server started\n[DEBUG] connection established\n[TRACE] request received'
+    const result = analyzeOutput(logText, { ...DEFAULT_CONFIG, mode: 'monitor', suppressLogs: true })
+    expect(result.shouldSuppress).toBe(false)
     expect(result.detectedPatterns.length).toBeGreaterThan(0)
   })
 

@@ -3,8 +3,10 @@ import path from 'path'
 
 export type AlertLevel = 'info' | 'warning' | 'error' | 'alert'
 export type OutputType = 'log' | 'history' | 'code' | 'response' | 'tool_result' | 'unknown'
+export type PluginMode = 'off' | 'monitor' | 'active'
 
 export interface TokenSaverConfig {
+  mode: PluginMode
   warningThresholdTokens: number
   errorThresholdTokens: number
   alertThresholdTokens: number
@@ -15,6 +17,7 @@ export interface TokenSaverConfig {
 }
 
 export const DEFAULT_CONFIG: TokenSaverConfig = {
+  mode: 'off',
   warningThresholdTokens: 1000,
   errorThresholdTokens: 5000,
   alertThresholdTokens: 10000,
@@ -99,7 +102,8 @@ export function analyzeOutput(
   const detectedPatterns = checkLogPatterns(text, config.logPatterns)
 
   const isLog = outputType === 'log' || detectedPatterns.length >= 2
-  const shouldSuppress = (isLog && config.suppressLogs)
+  // monitor mode: analyze but never suppress; active mode: full suppression
+  const shouldSuppress = config.mode === 'active' && isLog && config.suppressLogs
 
   let alertLevel: AlertLevel = 'info'
   let reason = ''
