@@ -1,6 +1,6 @@
 {
   "name": "token-saver-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP plugin that fires warnings, errors, and alerts when AI token usage is wasteful. Works with any MCP client. Auto-suppresses logs and ignored history to keep context lean.",
   "type": "module",
   "main": "dist/index.js",

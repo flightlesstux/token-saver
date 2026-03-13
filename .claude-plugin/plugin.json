@@ -1,6 +1,6 @@
 {
   "name": "token-saver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP plugin that fires warnings, errors, and alerts on wasteful Claude API token usage. Auto-suppresses logs and ignored history.",
   "author": {
     "name": "Ercan Ermis",
