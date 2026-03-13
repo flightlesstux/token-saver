@@ -58,7 +58,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract version
@@ -72,7 +72,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/token-saver:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/token-saver:${{ steps.version.outputs.version }}
+            ${{ vars.DOCKERHUB_USERNAME }}/token-saver:latest
+            ${{ vars.DOCKERHUB_USERNAME }}/token-saver:${{ steps.version.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
