@@ -1,0 +1,72 @@
+{
+  "name": "token-saver-mcp",
+  "version": "1.1.1",
+  "description": "MCP plugin that monitors Claude API outputs and fires warnings/errors/alerts when token usage is wasteful. Auto-suppresses logs and ignored history to keep context lean.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "token-saver-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "benchmark": "vitest run src/__tests__/benchmarks/ --passWithNoTests"
+  },
+  "keywords": [
+    "claude",
+    "anthropic",
+    "mcp",
+    "token-saver",
+    "claude-code",
+    "token-optimization",
+    "alerts",
+    "warnings",
+    "llm",
+    "developer-tools",
+    "cost-reduction"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.0.0",
+    "@commitlint/types": "^19.0.0",
+    "@eslint/js": "^9.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "eslint": "^9.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flightlesstux/token-saver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flightlesstux/token-saver/issues"
+  },
+  "homepage": "https://flightlesstux.github.io/token-saver/"
+}

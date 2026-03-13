@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>token-saver — Stop Burning Tokens on Ignored Output</title>
+  <meta name="description" content="MCP plugin that fires warnings, errors and alerts when Claude API output is wasteful. Auto-suppresses logs, verbose history, and noise to keep your context lean." />
+  <meta name="author" content="Ercan Ermis" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#f59e0b" />
+  <link rel="canonical" href="https://flightlesstux.github.io/token-saver/" />
+  <link rel="sitemap" type="application/xml" href="/token-saver/sitemap.xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="token-saver" />
+  <meta property="og:title" content="token-saver — Stop Burning Tokens on Ignored Output" />
+  <meta property="og:description" content="MCP plugin that fires warnings, errors and alerts when Claude API output is wasteful. Auto-suppresses logs, verbose history, and noise." />
+  <meta property="og:url" content="https://flightlesstux.github.io/token-saver/" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="token-saver — Stop Burning Tokens on Ignored Output" />
+  <meta name="twitter:description" content="MCP plugin that fires warnings, errors and alerts when Claude API output is wasteful. Auto-suppresses logs and noise." />
+  <meta name="twitter:creator" content="@ercanermis" />
+
+  <!-- Keywords -->
+  <meta name="keywords" content="token saver, Claude Code, Anthropic API, MCP plugin, token optimization, alert, warning, LLM cost, context window" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "token-saver",
+    "description": "MCP plugin that monitors Claude API outputs and fires warnings/errors/alerts when token usage is wasteful. Auto-suppresses logs and ignored history.",
+    "url": "https://flightlesstux.github.io/token-saver/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Ercan Ermis",
+      "url": "https://linkedin.com/in/ercanermis"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/flightlesstux/token-saver"
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H440JZZ0H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H440JZZ0H1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">token<span class="logo-sep">—</span>saver</span>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#tools">Tools</a>
+        <a href="#install">Install</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+  <header class="hero">
+    <div class="hero-blob hero-blob--1"></div>
+    <div class="hero-blob hero-blob--2"></div>
+    <div class="hero-blob hero-blob--3"></div>
+    <div class="container hero-layout">
+      <div class="hero-left">
+        <div class="badge animate-1">MCP Plugin · Open Source · MIT</div>
+        <p class="slogan animate-1">Built for Claude. Watches every token.</p>
+        <h1 class="animate-2">Stop burning tokens<br/>on output<br/><em>nobody reads.</em></h1>
+        <p class="hero-sub animate-3">
+          token-saver monitors your Claude API outputs and fires <strong>warnings, errors, and alerts</strong> when usage is wasteful. Logs, verbose history, and repetitive noise — suppressed automatically to keep your context lean.
+        </p>
+        <div class="hero-actions animate-4">
+          <a href="#install" class="btn-primary">Get started</a>
+          <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer" class="btn-ghost">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="hero-right animate-5">
+        <div class="hero-code">
+          <div class="code-titlebar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="code-title">check_output response</span>
+          </div>
+          <pre><code><span class="c-brace">{</span>
+  <span class="c-key">"alertLevel"</span><span class="c-colon">:</span> <span class="c-warn">"warning"</span><span class="c-brace">,</span>
+  <span class="c-key">"tokens"</span><span class="c-colon">:</span> <span class="c-str">1842</span><span class="c-brace">,</span>
+  <span class="c-key">"outputType"</span><span class="c-colon">:</span> <span class="c-str">"log"</span><span class="c-brace">,</span>
+  <span class="c-key">"shouldSuppress"</span><span class="c-colon">:</span> <span class="c-warn">true</span><span class="c-brace">,</span>
+  <span class="c-key">"reason"</span><span class="c-colon">:</span> <span class="c-str">"Output matches log/noise patterns"</span><span class="c-brace">,</span>
+  <span class="c-key">"detectedPatterns"</span><span class="c-colon">:</span> <span class="c-brace">[...]</span>
+<span class="c-brace">}</span></code></pre>
+          <div class="code-footer">
+            <a href="#tools" class="code-badge">5 MCP tools → see below ↓</a>
+          </div>
+        </div>
+        <div class="savings-pill animate-6">
+          <span class="savings-num">4</span>
+          <span class="savings-text">alert<br/>levels</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">alert levels</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">MCP tools</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">config required</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">MIT</span>
+        <span class="stat-label">open source</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How <em>token-saver</em> works</h2>
+        <p class="section-sub">
+          Every API output passes through token-saver's analyzer. It estimates token count, detects noise patterns (logs, stack traces, verbose history), and fires an alert if usage exceeds your thresholds. <strong>Suppressed outputs are never sent back</strong> into the context window.
+        </p>
+      </div>
+
+      <div class="modes-grid">
+        <div class="mode-card">
+          <div class="mode-icon">⚠️</div>
+          <h3>Threshold Alerts</h3>
+          <p>Set warning (1000), error (5000), and alert (10000) token thresholds. Any output that exceeds a threshold fires the appropriate level immediately.</p>
+          <div class="mode-trigger">configurable per session</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon">🔕</div>
+          <h3>Log Suppression</h3>
+          <p>Detects log-pattern outputs — INFO, DEBUG, TRACE, timestamps, stack traces, ANSI escape codes — and marks them for suppression automatically.</p>
+          <div class="mode-trigger">suppressLogs: true (default)</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon">🔁</div>
+          <h3>Repetitive History Detection</h3>
+          <p>Scans your conversation history for near-duplicate messages and large assistant outputs the user likely ignored. Reports estimated token savings from truncation.</p>
+          <div class="mode-trigger">analyze_history tool</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon">📊</div>
+          <h3>Session Statistics</h3>
+          <p>Accumulates total tokens analyzed, suppressed, and saved across every turn. Get a full breakdown at any point with get_session_stats.</p>
+          <div class="mode-trigger">always on</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" id="tools">
+    <div class="container">
+      <div class="section-header">
+        <h2>MCP <em>Tools</em></h2>
+        <p class="section-sub">Five focused tools. Each does exactly one thing.</p>
+      </div>
+
+      <div class="benchmark-table-wrap">
+        <table class="benchmark-table">
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Description</th>
+              <th>Alert level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">check_output</code></td>
+              <td>Analyze a text output. Returns alert level, token count, suppression flag, and detected patterns.</td>
+              <td><span class="savings">info / warning / error / alert</span></td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">get_session_stats</code></td>
+              <td>Return cumulative session statistics: tokens analyzed, suppressed, saved, and alert counts.</td>
+              <td class="dim">—</td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">reset_session_stats</code></td>
+              <td>Reset all session statistics to zero.</td>
+              <td class="dim">—</td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">analyze_history</code></td>
+              <td>Scan a messages array for near-duplicates and ignored log outputs. Returns suggested truncation and savings estimate.</td>
+              <td><span class="savings">info / warning / error / alert</span></td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--amber);font-family:var(--mono);background:rgba(245,158,11,0.08);padding:2px 8px;border-radius:4px">set_thresholds</code></td>
+              <td>Override warning / error / alert token thresholds and suppression flags for the current session.</td>
+              <td class="dim">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="benchmark-note">Alert levels: info (normal) · warning (&gt;1000 tokens) · error (&gt;5000 tokens) · alert (&gt;10000 tokens or repetitive ignored output)</div>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <div class="container">
+      <div class="section-header">
+        <h2>Install <em>token-saver</em></h2>
+        <p class="section-sub">Two steps. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible client.</p>
+      </div>
+
+      <div class="install-tabs">
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="step-track"><div class="step-num">1</div><div class="step-line"></div></div>
+            <div class="step-content">
+              <h3>Install globally via npm</h3>
+              <pre><code>npm install -g token-saver-mcp</code></pre>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-track"><div class="step-num">2</div><div class="step-line"></div></div>
+            <div class="step-content">
+              <h3>Add to Claude Code settings</h3>
+              <p>Edit <code>~/.claude/settings.json</code>:</p>
+              <pre><code>{
+  <span class="c-key">"mcpServers"</span>: {
+    <span class="c-key">"token-saver-mcp"</span>: {
+      <span class="c-key">"command"</span>: <span class="c-str">"token-saver-mcp"</span>
+    }
+  }
+}</code></pre>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-track"><div class="step-num">3</div></div>
+            <div class="step-content">
+              <h3>(Optional) Configure thresholds</h3>
+              <p>Create <code>.token-saver.json</code> in your project root:</p>
+              <pre><code>{
+  <span class="c-key">"warningThresholdTokens"</span>: <span class="c-str">1000</span>,
+  <span class="c-key">"errorThresholdTokens"</span>: <span class="c-str">5000</span>,
+  <span class="c-key">"alertThresholdTokens"</span>: <span class="c-str">10000</span>,
+  <span class="c-key">"suppressLogs"</span>: <span class="c-warn">true</span>,
+  <span class="c-key">"suppressRepetitiveHistory"</span>: <span class="c-warn">true</span>,
+  <span class="c-key">"inactivityTurnsBeforeAlert"</span>: <span class="c-str">3</span>
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>FAQ</h2>
+        <p class="section-sub">Common questions about token-saver.</p>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <h3>What is the difference between warning, error, and alert?</h3>
+          <p><strong>info</strong>: output is within normal bounds (&lt;1000 tokens). No action needed.</p>
+          <p><strong>warning</strong>: output exceeds 1000 tokens OR matches log/noise patterns — worth suppressing.</p>
+          <p><strong>error</strong>: output exceeds 5000 tokens — likely wasteful and should be truncated.</p>
+          <p><strong>alert</strong>: output exceeds 10000 tokens OR repetitive ignored messages exceed the inactivity threshold — immediate action recommended.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does token-saver actually delete or block output?</h3>
+          <p>No. token-saver is an <em>advisor</em>. It sets <code>shouldSuppress: true</code> on outputs that match suppression criteria and tells you why — but it does not intercept or modify any API calls. Your client decides what to do with that signal.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How does token counting work?</h3>
+          <p>token-saver uses a fast heuristic: approximately 4 characters per token. This is accurate enough for detecting waste at scale. It does not call the Anthropic tokenizer API (which would add latency and cost).</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Which models does it support?</h3>
+          <p>token-saver is model-agnostic — it analyzes text output regardless of which model produced it. It works with any Anthropic model and any MCP-compatible client.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I add custom log patterns?</h3>
+          <p>Yes. Add a <code>logPatterns</code> array to your <code>.token-saver.json</code> with additional regex strings. They merge with the built-in patterns.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cta">
+    <div class="container cta-inner">
+      <p class="cta-eyebrow">Open source · MIT · Zero lock-in</p>
+      <h2>Ready to stop burning tokens<br/>on <em>output nobody reads?</em></h2>
+      <div class="hero-actions">
+        <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer" class="btn-primary">View on GitHub</a>
+        <a href="https://github.com/flightlesstux/token-saver/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn-ghost">Contribute →</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">token<span class="logo-sep">—</span>saver</span>
+        <span class="footer-author">Made with care by <a href="https://linkedin.com/in/ercanermis" target="_blank" rel="noopener">Ercan Ermis</a></span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/flightlesstux/token-saver/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a>
+        <a href="https://github.com/flightlesstux/token-saver/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
+        <a href="https://www.npmjs.com/package/token-saver-mcp" target="_blank" rel="noopener noreferrer">npm</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

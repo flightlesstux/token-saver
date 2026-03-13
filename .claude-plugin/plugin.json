@@ -1,0 +1,30 @@
+{
+  "name": "token-saver",
+  "version": "1.0.0",
+  "description": "MCP plugin that fires warnings, errors, and alerts on wasteful Claude API token usage. Auto-suppresses logs and ignored history.",
+  "author": {
+    "name": "Ercan Ermis",
+    "url": "https://github.com/flightlesstux"
+  },
+  "homepage": "https://flightlesstux.github.io/token-saver/",
+  "repository": "https://github.com/flightlesstux/token-saver",
+  "license": "MIT",
+  "keywords": [
+    "tokens",
+    "alerts",
+    "warnings",
+    "cost",
+    "anthropic",
+    "mcp",
+    "optimization"
+  ],
+  "mcpServers": {
+    "token-saver-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "token-saver-mcp"
+      ]
+    }
+  }
+}

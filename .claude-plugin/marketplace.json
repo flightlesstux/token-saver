@@ -1,0 +1,38 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ercan-ermis",
+  "owner": {
+    "name": "Ercan Ermis (@flightlesstux)",
+    "email": "eposta@ercanermis.com"
+  },
+  "metadata": {
+    "description": "MCP plugin that fires warnings, errors, and alerts on wasteful Claude API token usage. Auto-suppresses logs and ignored history to keep context lean.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "token-saver",
+      "source": "./",
+      "description": "MCP plugin that monitors Claude API outputs and fires warnings, errors, and alerts when token usage is wasteful. Detects log noise, repetitive history, and oversized outputs. Auto-suppresses ignored content to keep your context lean.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ercan Ermis (@flightlesstux)",
+        "email": "eposta@ercanermis.com"
+      },
+      "category": "development",
+      "keywords": [
+        "tokens",
+        "alerts",
+        "warnings",
+        "cost",
+        "anthropic",
+        "mcp",
+        "optimization",
+        "token-saver",
+        "claude-code"
+      ],
+      "homepage": "https://flightlesstux.github.io/token-saver/",
+      "repository": "https://github.com/flightlesstux/token-saver"
+    }
+  ]
+}

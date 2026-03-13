@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>Privacy Policy — token-saver</title>
+  <meta name="description" content="Privacy policy for token-saver MCP plugin. No data collection, no telemetry, no external servers. Everything runs locally." />
+  <meta name="author" content="Ercan Ermis" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#f59e0b" />
+  <link rel="canonical" href="https://flightlesstux.github.io/token-saver/privacy" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="token-saver" />
+  <meta property="og:title" content="Privacy Policy — token-saver" />
+  <meta property="og:description" content="No data collection, no telemetry, no external servers. Everything runs locally on your machine." />
+  <meta property="og:url" content="https://flightlesstux.github.io/token-saver/privacy" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H440JZZ0H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H440JZZ0H1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .privacy-hero {
+      padding: 7rem 0 3rem;
+      position: relative;
+    }
+    .privacy-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .privacy-hero .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+    .privacy-date {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .privacy-body {
+      padding: 3rem 0 6rem;
+    }
+    .privacy-content {
+      max-width: 720px;
+    }
+    .privacy-block {
+      margin-bottom: 3rem;
+    }
+    .privacy-block h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .privacy-block h2 .block-icon {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .privacy-block p {
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .privacy-block ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .privacy-block ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .privacy-block ul li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+    .privacy-block ul.no-list li::before {
+      content: 'x';
+      background: none;
+      color: var(--error);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.3rem;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+    }
+    .privacy-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .privacy-card a {
+      color: var(--amber);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .privacy-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">token<span class="logo-sep">—</span>saver</a>
+      <div class="nav-links">
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#install">Install</a>
+        <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="privacy-hero">
+      <div class="hero-blob hero-blob--1" style="opacity:0.2"></div>
+      <div class="container">
+        <span class="privacy-date">Last updated: March 2026</span>
+        <h1>Privacy Policy</h1>
+        <p class="hero-sub">token-saver runs entirely on your machine. No data leaves. No analytics on your prompts. No telemetry.</p>
+      </div>
+    </section>
+
+    <section class="privacy-body">
+      <div class="container">
+        <div class="privacy-content">
+
+          <div class="privacy-block">
+            <h2><span class="block-icon">🔍</span>What this plugin processes</h2>
+            <p>The plugin reads the text outputs and message arrays you pass to its MCP tools in order to analyze token usage, detect log patterns, and identify repetitive history. It accumulates session counters in memory.</p>
+            <ul>
+              <li>Text passed to <code>check_output</code></li>
+              <li>Message arrays passed to <code>analyze_history</code></li>
+              <li>Token threshold settings passed to <code>set_thresholds</code></li>
+            </ul>
+          </div>
+
+          <hr class="privacy-divider" />
+
+          <div class="privacy-block">
+            <h2><span class="block-icon">🚫</span>What this plugin does NOT do</h2>
+            <ul class="no-list">
+              <li>Does not transmit any of your data to external servers</li>
+              <li>Does not store anything to disk — session statistics live in memory only and are lost on restart</li>
+              <li>Does not log, track, or analyze your prompts, code, or conversations beyond what you explicitly pass to a tool</li>
+              <li>Does not include analytics, telemetry, or crash reporting of any kind</li>
+              <li>Does not read your files, environment variables, or system configuration</li>
+            </ul>
+          </div>
+
+          <hr class="privacy-divider" />
+
+          <div class="privacy-block">
+            <h2><span class="block-icon">🔗</span>Third-party services</h2>
+            <p>This plugin itself has no third-party integrations. When you use it as part of an AI workflow, your messages are sent to the services your client is configured to use:</p>
+            <div class="privacy-card">
+              <ul>
+                <li><strong>Anthropic API</strong> — your messages are processed by Anthropic's infrastructure. See <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>.</li>
+                <li><strong>Your AI client</strong> (Claude Code, Cursor, Windsurf, etc.) — each has its own privacy policy.</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr class="privacy-divider" />
+
+          <div class="privacy-block">
+            <h2><span class="block-icon">🏠</span>Data residency</h2>
+            <p>No data from this plugin leaves the machine it runs on. All processing is local and in-memory. When you stop the MCP server, all session data is gone.</p>
+          </div>
+
+          <hr class="privacy-divider" />
+
+          <div class="privacy-block">
+            <h2><span class="block-icon">📬</span>Contact</h2>
+            <p>Questions about this privacy policy? Open an issue on GitHub:</p>
+            <div class="privacy-card">
+              <a href="https://github.com/flightlesstux/token-saver/issues" target="_blank" rel="noopener">github.com/flightlesstux/token-saver/issues</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">token<span class="logo-sep">—</span>saver</span>
+        <span class="footer-author">Made with care by <a href="https://linkedin.com/in/ercanermis" target="_blank" rel="noopener">Ercan Ermis</a></span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/flightlesstux/token-saver" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/flightlesstux/token-saver/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a>
+        <a href="https://github.com/flightlesstux/token-saver/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
+        <a href="https://www.npmjs.com/package/token-saver-mcp" target="_blank" rel="noopener noreferrer">npm</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
