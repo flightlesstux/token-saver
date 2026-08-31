@@ -20,11 +20,13 @@
   ],
   "mcpServers": {
     "token-saver-mcp": {
-      "command": "npx",
-      "args": [
+      "type": "local",
+      "command": [
+        "npx",
         "-y",
         "token-saver-mcp"
-      ]
+      ],
+      "enabled": true
     }
   }
 }
